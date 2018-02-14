@@ -40,7 +40,7 @@ let text_y_cordinate = 470;
 function setup() {
 //res for Java vs res for Android
   //fullScreen();
-  canvas(1000, 600);
+  createCanvas(1000, 600);
   
   //let's implement instruments now.
   for(i = 0; i < 5; i++){

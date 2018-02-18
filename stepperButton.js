@@ -1,25 +1,24 @@
 class StepperButton {
-    isActive;
-    
-    //display_stuff
-    stepper_width = 40;
-    stepper_height = 40;
-    y_coordinate = height / 2 + height / 4 + offset - 10;
-    
+
+//In Javascript you CANNOT declare object variables outside of the constructor.
+//Like a ball, you pass the constructor parameter to the instance itself
+//and this instance will be visible outside of the scope of the constructor like you want.
+
     //constructor here
-    constructor(isActive) 
+    constructor(isActive)
     {
         this.isActive = isActive;
     }
-      
-      display(i) 
+
+      display(i)
       {
-          rect(width / 9 + (stepper_offset) * i, y_coordinate, stepper_width, stepper_height);
+        strokeWeight(4);
+          rect(width / 9 + (stepper_offset) * i, stepper_y_coordinate, stepper_width, stepper_height);
       }
-      
-      fillit() 
+
+      fillit()
       {
-        if(isActive){
+        if(this.isActive){
           fill(255, 0, 0);
         } else {
             noFill();

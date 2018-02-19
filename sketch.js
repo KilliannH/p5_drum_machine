@@ -3,7 +3,11 @@ let height = 600;
 let offset = 60;
 
 //Sound stuff here
-let bd = [8];
+let bd;
+let snr;
+let hh;
+let tom1;
+let tom2;
 refresh = 0;
 
 //Activebutton stuff
@@ -35,7 +39,7 @@ let play_txt;
 
 //The key of this app
   timer = 0;
-  unit = 150; //1000 for 60bpms, let's make it 300 for tests :p
+  unit = 150; //unit should oscilate between 75 & 150.
 
 //Blinkbutton stuff
 blink_width = 12;
@@ -56,13 +60,16 @@ let tom2StepperButton = [16];
 
 function preload() {
   //Sound init
-    for(i = 0; i < 8; i++) {
-      bd[i] = loadSound("/data/kicks/KICK" + (i + 1) + ".mp3");
-    }
+      bd = loadSound("/data/KICK.mp3");
+      snr = loadSound("/data/SNR.mp3");
+      hh = loadSound("/data/HH.mp3");
+      tom1 = loadSound("/data/TOM1.mp3");
+      tom2 = loadSound("/data/TOM2.mp3");
 }
 
 
 function setup() {
+   frameRate(50);
   createCanvas(1000, 600);
 
 //playButton init
@@ -111,7 +118,6 @@ play_txt = new TextStuff("Play", (width / 2) - (width / 3) - isActive_offset - 9
 function draw() {
 
  background(40);
- frameRate(50);
 
  //timerStuff here;
 text(refresh, width - 90, 70);
@@ -196,9 +202,29 @@ blinkButton[i].displayAndFill(i);
 //////////////Sound plays
 for(i = 0; i < 16; i++)
   {
-    if(bdStepperButton[i].isActive && blinkButton[i].isActive && !bd[0].isPlaying())
+    if(bdStepperButton[i].isActive && blinkButton[i].isActive && !bd.isPlaying())
     {
-      bd[0].play();
+      bd.play();
+    }
+
+    if(snrStepperButton[i].isActive && blinkButton[i].isActive && !snr.isPlaying())
+    {
+      snr.play();
+    }
+
+    if(hhStepperButton[i].isActive && blinkButton[i].isActive && !hh.isPlaying())
+    {
+      hh.play();
+    }
+
+    if(tom1StepperButton[i].isActive && blinkButton[i].isActive && !tom1.isPlaying())
+    {
+      tom1.play();
+    }
+
+    if(tom2StepperButton[i].isActive && blinkButton[i].isActive && !tom2.isPlaying())
+    {
+      tom2.play();
     }
   }
 }

@@ -137,12 +137,15 @@ text(time, width - 70, 40); //timer display
 
 if(playButton.isPlaying)
   {
-    if(millis() - time >= wait)
-    {
-      for(i = 0; i < 16; i++)
+    i = 0; //Look at this mega for loop comming in :)
+
+    if(millis() - time >= wait / 2) //wait will be the bpm variable
+    {                               //here is 120 bpms.
         blinkButton[i].isActive = !blinkButton[i].isActive;
+        i = ;
         time = millis();//also update the stored time
-      }
+    }
+
   }
 
  playButton.displayAndFill();

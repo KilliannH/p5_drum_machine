@@ -9,7 +9,7 @@ class TextStuff {
     }
 
     drawText(){
-      strokeWeight(1);
+      strokeWeight(0);
       fill(255);
       textSize(this.text_size);
       text(this.text_content, this.text_x_cordinate, this.text_y_cordinate);

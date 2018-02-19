@@ -2,6 +2,10 @@ let width = 1000;
 let height = 600;
 let offset = 60;
 
+//Sound stuff here
+let bd = [8];
+refresh = 0;
+
 //Activebutton stuff
 active_button_width = 40;
 active_button_height = 20;
@@ -49,6 +53,14 @@ let snrStepperButton = [16];
 let hhStepperButton = [16];
 let tom1StepperButton = [16];
 let tom2StepperButton = [16];
+
+function preload() {
+  //Sound init
+    for(i = 0; i < 8; i++) {
+      bd[i] = loadSound("/data/kicks/KICK" + (i + 1) + ".mp3");
+    }
+}
+
 
 function setup() {
   createCanvas(1000, 600);
@@ -99,8 +111,10 @@ play_txt = new TextStuff("Play", (width / 2) - (width / 3) - isActive_offset - 9
 function draw() {
 
  background(40);
+ frameRate(50);
 
  //timerStuff here;
+text(refresh, width - 90, 70);
 text(timer, width - 90, 50); //timer display
 
   if(playButton.isPlaying){
@@ -135,7 +149,6 @@ text(timer, width - 90, 50); //timer display
   active_button[4].displayAndFill(width - width / 6 - isActive_offset);
 
 //blinks displays
-//Blinks here
 for (i = 0; i < 16; i++)
 {
 blinkButton[i].displayAndFill(i);
@@ -179,12 +192,20 @@ blinkButton[i].displayAndFill(i);
   pitch_txt.drawText();
 
   play_txt.drawText();
+
+//////////////Sound plays
+for(i = 0; i < 16; i++)
+  {
+    if(bdStepperButton[i].isActive && blinkButton[i].isActive && !bd[0].isPlaying())
+    {
+      bd[0].play();
+    }
+  }
 }
 
 //mouse detection here
 function mousePressed()
 {
-  console.log("bibi");
   //for loop detects what step is going to be selected;
   for (i = 0; i < 16; i++)
   {

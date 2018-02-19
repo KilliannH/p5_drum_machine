@@ -12,7 +12,7 @@ class StepperButton {
 
       display(i)
       {
-        strokeWeight(4);
+        strokeWeight(2);
           rect(width / 9 + (stepper_offset) * i, stepper_y_coordinate, stepper_width, stepper_height);
       }
 

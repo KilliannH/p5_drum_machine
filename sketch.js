@@ -35,7 +35,7 @@ let play_txt;
 
 //The key of this app
   timer = 0;
-  unit = 300; //1000 for 60bpms, let's make it 300 for tests :p
+  unit = 150; //1000 for 60bpms, let's make it 300 for tests :p
 
 //Blinkbutton stuff
 blink_width = 12;

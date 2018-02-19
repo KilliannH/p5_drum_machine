@@ -8,7 +8,6 @@ let snr;
 let hh;
 let tom1;
 let tom2;
-refresh = 0;
 
 //Activebutton stuff
 active_button_width = 40;
@@ -38,8 +37,15 @@ let pitch_txt;
 let play_txt;
 
 //The key of this app
-  timer = 0;
-  unit = 150; //unit should oscilate between 75 & 150.
+time = 0;
+wait = 1000;
+
+//Bpm stuff here
+let bpmButton;
+bpm_width = 50;
+bpm_height = 50;
+bpm_x = 930;
+bpm_y = 80;
 
 //Blinkbutton stuff
 blink_width = 12;
@@ -69,7 +75,11 @@ function preload() {
 
 
 function setup() {
-   frameRate(50);
+
+  //optimising stability
+  time=0;
+  frameRate(60);
+
   createCanvas(1000, 600);
 
 //playButton init
@@ -87,6 +97,8 @@ envelope_txt = new TextStuff("Envlp", 70, 220, 16);
 pitch_txt = new TextStuff("Pitch", 70, 95, 16);
 
 play_txt = new TextStuff("Play", (width / 2) - (width / 3) - isActive_offset - 92, text_y_cordinate, 16);
+
+bpmButton = new BpmButton();
 
 //actives init
   for(i = 0; i < 5; i++)
@@ -120,30 +132,18 @@ function draw() {
  background(40);
 
  //timerStuff here;
-text(refresh, width - 90, 70);
-text(timer, width - 90, 50); //timer display
+strokeWeight(1);
+text(time, width - 70, 40); //timer display
 
-  if(playButton.isPlaying){
-    timer = timer + (20 / unit); //bpm = 60, if bpm += 1, unit -= 16;
-    for(i = 0; i < 16; i++)
+if(playButton.isPlaying)
+  {
+    if(millis() - time >= wait)
     {
-       if(timer > 16){
-          timer = 0; //this works because we check the blink only on seconds.
-          //So the end of the last /16 note is complete
-        }
-       if(timer > i && timer < i + 1){
-         blinkButton[i].isActive = true;
-       } else {
-         blinkButton[i].isActive = false;
-       }
-    }
-  } else {
-    timer = 0;
-    for(i = 0; i < 16; i++)
-    {
-      blinkButton[i].isActive = false;
-    }
- }
+      for(i = 0; i < 16; i++)
+        blinkButton[i].isActive = !blinkButton[i].isActive;
+        time = millis();//also update the stored time
+      }
+  }
 
  playButton.displayAndFill();
 
@@ -198,6 +198,8 @@ blinkButton[i].displayAndFill(i);
   pitch_txt.drawText();
 
   play_txt.drawText();
+
+  bpmButton.displayAndFill();
 
 //////////////Sound plays
 for(i = 0; i < 16; i++)
